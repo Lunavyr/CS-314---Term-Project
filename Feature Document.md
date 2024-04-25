@@ -15,7 +15,7 @@ most important reference when setting up sprint backlog.
 7. Delete a chatroom.
 8. Proper database storage/hosting for the following: user info, contacts, and message history.
 
-###Non-required features
+### Non-required features
 1. Define user priviledge (will allow for moderation of groupchats and for non-owners to delete chatroom).
 2. Allow users to leave groupchats (or perhaps change the initial behavior to invitation instead of automatic admission).
 3. Search within chat history for with a search string.
