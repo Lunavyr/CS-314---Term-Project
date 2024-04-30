@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/Frank/OneDrive/Documents/College/PSU/Spring 2024/CS 314 - Elements of Software Engineering/Course Project/CS-314---Term-Project/Chat Application (GooberChat)",
+      "program": "c:/Users/Frank/OneDrive/Documents/College/PSU/Spring 2024/CS 314 - Elements of Software Engineering/Course Project/CS-314---Term-Project/Chat Application (GooberChat)/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
