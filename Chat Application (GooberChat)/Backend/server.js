@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./Config/database");
 const UserRoutes = require("./Routes/UserRoutes")
-const {notFound, errorHandler} = require("")
+const {notFound, errorHandler} = require("./ErrorHandlers/error")
 
 dotenv.config()
 connectDB();
