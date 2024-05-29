@@ -23,4 +23,40 @@ app.use('/api/message', MessageRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(3000, console.log("Server started on port 3000"));
+const server = app.listen(3000, console.log("Server started on port 3000"));
+const sockfd = require("socket.io")(server, {pingTimeout: 30000, cors:{origin: "http://localhost:3000"}})
+
+sockfd.on("connection", (socket) => {
+    console.log("Connected to socket.io.")
+
+    socket.on("setup", (userData) =>{
+        socket.join(userData._id);
+        socket.emit("connected")
+    });
+
+    socket.on("join chat", (room) => {
+        socket.join(room);
+        console.log("Connected to " + room)
+    });
+
+    socket.on("new message", (newMessage) => {
+        var chat = newMessage.chat;
+        if (!chat.users) {
+            return console.log("Users not present in chat.")
+        }
+        chat.users.forEach(user =>{
+            if (user._id == newMessage.sender._id) {
+                return;
+            }
+            socket.in(iser._id).emit("message recieved", newMessage)
+        })
+    });
+
+    socket.off("setup", () => {
+        console.log("disconnected")
+    })
+});
+
+sockfd.on("disconnect", () => {
+    console.log("User disconnected.")
+});
