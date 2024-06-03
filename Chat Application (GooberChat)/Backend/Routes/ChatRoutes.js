@@ -23,7 +23,7 @@ router.route('/').get(validate, getChats);
 router.route('/delete').delete(validate, deleteChat);
 // Creates a group chat - requires at least 3 users including the currently logged in user
 // In other words - two user id must be passed in.
-router.route('/group').get(validate, makeGChat);
+router.route('/group').post(validate, makeGChat);
 // Renames a group chat - Requires new name and target group chat Id
 router.route('/rename').put(validate, renameGchat);
 // Add's a user to an existing group chat - Requires target userId
