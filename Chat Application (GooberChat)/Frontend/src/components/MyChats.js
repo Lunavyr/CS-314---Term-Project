@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { getSender } from "../config/ChatLogics";
 import ChatLoading from "./ChatLoading";
 import GroupChatModal from "./miscellaneous/GroupChatModal";
-import { Button } from "@chakra-ui/react";
+import { Button, CloseButton } from "@chakra-ui/react";
 import { ChatState } from "../Context/ChatProvider";
 
 const MyChats = ({ fetchAgain }) => {
@@ -17,7 +17,6 @@ const MyChats = ({ fetchAgain }) => {
   const toast = useToast();
 
   const fetchChats = async () => {
-    // console.log(user._id);
     try {
       const config = {
         headers: {
@@ -30,7 +29,43 @@ const MyChats = ({ fetchAgain }) => {
     } catch (error) {
       toast({
         title: "Error Occured!",
-        description: "Failed to Load the chats",
+        description: "Failed to Load the Chats",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+    }
+  };
+  
+  const removeChat = async (chat) => {
+    try {
+      if (chat.isGroupChat && chat.groupAdmin._id !== user._id) {
+        toast({
+          title: "Only admins can delete a chat!",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom",
+        });
+        return;
+      }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+        data: {
+          chatId: chat._id,
+        }
+      };
+      
+      const { data } = await axios.delete("/api/chat/delete", config);
+      setChats(chats.filter((sel) => sel._id !== chat._id));
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Error Occurred!",
+        description: "Failed to Delete the Chat",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -42,7 +77,6 @@ const MyChats = ({ fetchAgain }) => {
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-    // eslint-disable-next-line
   }, [fetchAgain]);
 
   return (
@@ -83,7 +117,7 @@ const MyChats = ({ fetchAgain }) => {
       <Box
         display="flex"
         flexDir="column"
-        p={3}
+        p={3}f
         bg="#ffdaad"
         w="100%"
         h="100%"
@@ -117,6 +151,7 @@ const MyChats = ({ fetchAgain }) => {
                       : chat.latestMessage.content}
                   </Text>
                 )}
+                <CloseButton color="darkblue" onClick={() => removeChat(chat)} float="right"/>
               </Box>
             ))}
           </Stack>
