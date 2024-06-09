@@ -20,6 +20,7 @@ Backend:
 
 Frontend:
 * Change to the Frontend directory (cd Frontend) - run "npm start"
+* (*Note): this process didn't work on our usage on a windows 11 machine until after running "npm audit fix --force" twice, then retrying. 
   
 System:
 * Upon successful start of the front, a tab in your web browser should open. If not then simply go to "localhost:${PORT}/" where PORT is your selected port.
