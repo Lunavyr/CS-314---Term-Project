@@ -40,7 +40,6 @@ System:
 
 
 ## Test overview:
-
 ### Backend:
 * We have not currently implemented any automated testing using any frameworks. However, the backend has been fully tested in Postman.
 * All API paths have been tested and verified for both valid and invalid data (if required).
