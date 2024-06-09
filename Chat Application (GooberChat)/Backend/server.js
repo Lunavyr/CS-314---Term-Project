@@ -23,7 +23,8 @@ app.use('/api/message', MessageRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const server = app.listen(5000, console.log("Server started on port 5000"));
+const PORT = process.env.PORT
+const server = app.listen(PORT, console.log(`Server started on port ${PORT}`));
 const sockfd = require("socket.io")(server, {pingTimeout: 30000, cors:{origin: "http://localhost:3000"}})
 
 sockfd.on("connection", (socket) => {
