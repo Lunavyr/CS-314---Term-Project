@@ -25,7 +25,7 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT
 const server = app.listen(PORT, console.log(`Server started on port ${PORT}`));
-const sockfd = require("socket.io")(server, {pingTimeout: 30000, cors:{origin: "http://localhost:3000"}})
+const sockfd = require("socket.io")(server, {pingTimeout: 30000, cors:{origin: `http://localhost:${PORT}`}})
 
 sockfd.on("connection", (socket) => {
     console.log("Connected to socket.io.")
